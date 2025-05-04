@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven' // Use a generic name; we'll configure it in Jenkins
+        maven 'Maven' // Configured in Jenkins
     }
     environment {
         DOCKER_IMAGE = "sammytrips/spring-petclinic:${BUILD_NUMBER}"
@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/sammy-314/spring-petclinic.git'
+                git branch: 'main', url: 'https://github.com/sammy-314/spring-petclinic.git'
             }
         }
         stage('Build with Maven') {
