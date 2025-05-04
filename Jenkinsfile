@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven 3.8.1'
+        maven 'Maven' // Use a generic name; we'll configure it in Jenkins
     }
     environment {
         DOCKER_IMAGE = "sammytrips/spring-petclinic:${BUILD_NUMBER}"
@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Push to Docker Hub') {
             steps {
-                withDockerRegistry([credentialsId: 'docker-hub-creds']) {
+                withDockerRegistry([credentialsId: 'docker-hub-creds', url: 'https://index.docker.io/v1/']) {
                     sh 'docker push $DOCKER_IMAGE'
                 }
             }
